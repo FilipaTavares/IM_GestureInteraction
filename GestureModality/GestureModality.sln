@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestureModality", "GestureModality\GestureModality.csproj", "{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Debug|x64.ActiveCfg = Debug|x64
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Debug|x64.Build.0 = Debug|x64
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Debug|x86.ActiveCfg = Debug|x86
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Debug|x86.Build.0 = Debug|x86
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Release|x64.ActiveCfg = Release|x64
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Release|x64.Build.0 = Release|x64
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Release|x86.ActiveCfg = Release|x86
+		{BDFEAD10-C87E-4CEB-BA84-603E6AA44547}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A512896B-A478-4E53-BBFB-2797BAAD75EB}
+	EndGlobalSection
+EndGlobal
