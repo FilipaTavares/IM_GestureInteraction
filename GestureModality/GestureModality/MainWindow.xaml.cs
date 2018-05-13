@@ -298,7 +298,6 @@ namespace GestureModality
                     // if the current body is tracked, unpause its detector to get VisualGestureBuilderFrameArrived events
                     // if the current body is not tracked, pause its detector so we don't waste resources trying to get invalid gesture results
                     this.gestureDetector.IsPaused = currentTrackingId == 0;
-
                 }
             }
         }
