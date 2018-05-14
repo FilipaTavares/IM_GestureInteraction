@@ -23,6 +23,7 @@ namespace GestureModality
     using System.Windows.Controls;
     using Microsoft.Kinect;
     using Microsoft.Kinect.VisualGestureBuilder;
+    using Microsoft.Kinect.Wpf.Controls;
 
     /// <summary>
     /// Interaction logic for the MainWindow
@@ -88,6 +89,14 @@ namespace GestureModality
 
             // initialize the MainWindow
             this.InitializeComponent();
+
+            KinectRegion.SetKinectRegion(this, kinectRegion);
+
+            App app = ((App)Application.Current);
+            app.KinectRegion = kinectRegion;
+
+            // Use the default sensor
+            kinectRegion.KinectSensor = this.kinectSensor;
 
             // set our data context objects for display in UI
             this.DataContext = this;
@@ -300,6 +309,11 @@ namespace GestureModality
                     this.gestureDetector.IsPaused = currentTrackingId == 0;
                 }
             }
+        }
+
+        private void ClickMe_Click(object sender, RoutedEventArgs e)
+        {
+            //KinectStatus.Content = "Clicked me";
         }
     }
 }
