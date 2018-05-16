@@ -21,6 +21,7 @@ namespace GestureModality
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
+    using MahApps.Metro.Controls;
     using Microsoft.Kinect;
     using Microsoft.Kinect.VisualGestureBuilder;
     using Microsoft.Kinect.Wpf.Controls;
@@ -28,7 +29,7 @@ namespace GestureModality
     /// <summary>
     /// Interaction logic for the MainWindow
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
         /// <summary> Active Kinect sensor </summary>
         private KinectSensor kinectSensor = null;
@@ -45,15 +46,9 @@ namespace GestureModality
         /// <summary> KinectBodyView object which handles drawing the Kinect bodies to a View box in the UI </summary>
         private KinectBodyView kinectBodyView = null;
 
-        /// <summary> List of gesture detectors, there will be one detector created for each potential body (max of 6) </summary>
-        private List<GestureDetector> gestureDetectorList = null;
-
-
         private GestureDetector gestureDetector = null;
 
-
         private Body currentTrackedBody = null;
-
 
         private ulong currentTrackingId = 0;
 
@@ -62,6 +57,8 @@ namespace GestureModality
         /// </summary>
         public MainWindow()
         {
+            InitializeComponent();
+
             // only one sensor is currently supported
             this.kinectSensor = KinectSensor.GetDefault();
 
@@ -84,12 +81,6 @@ namespace GestureModality
             // initialize the BodyViewer object for displaying tracked bodies in the UI
             this.kinectBodyView = new KinectBodyView(this.kinectSensor);
 
-            // initialize the gesture detection objects for our gestures
-            this.gestureDetectorList = new List<GestureDetector>();
-
-            // initialize the MainWindow
-            this.InitializeComponent();
-
             KinectRegion.SetKinectRegion(this, kinectRegion);
 
             App app = ((App)Application.Current);
@@ -102,22 +93,7 @@ namespace GestureModality
             this.DataContext = this;
             this.kinectBodyViewbox.DataContext = this.kinectBodyView;
 
-            // create a gesture detector for each body (6 bodies => 6 detectors) and create content controls to display results in the UI
-            int col0Row = 0;
-            int col1Row = 0;
-            int maxBodies = 1;
-
-            GestureResultView result = new GestureResultView(0, false, false, 0.0f);
-            this.gestureDetector = new GestureDetector(this.kinectSensor, result, this);
-
-            // split gesture results across the first two columns of the content grid
-            ContentControl contentControl = new ContentControl();
-            contentControl.Content = this.gestureDetector.GestureResultView;
-
-            // Gesture results for bodies: 0, 2, 4
-            Grid.SetColumn(contentControl, 0);
-            Grid.SetRow(contentControl, col0Row);
-            this.contentGrid.Children.Add(contentControl);
+            this.gestureDetector = new GestureDetector(this.kinectSensor, this);
         }
 
         /// <summary>

@@ -1,10 +1,13 @@
-﻿<Window x:Class="GestureModality.MainWindow"
+﻿<Controls:MetroWindow
+     x:Class="GestureModality.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:k="http://schemas.microsoft.com/kinect/2014"
         xmlns:local="clr-namespace:GestureModality"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Title="Gesture Modality"
         Height="1000" Width="1500"
         Closing="MainWindow_Closing">
@@ -12,24 +15,6 @@
         <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
         <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
         <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2" />
-
-        <DataTemplate DataType="{x:Type local:GestureResultView}">
-            <Grid Width="Auto" Margin="5" Background="{Binding BodyColor}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock HorizontalAlignment="Stretch" Text="{Binding BodyIndex, StringFormat='Body Index: {0}'}" FontSize="14" FontFamily="Segoe UI" FontWeight="SemiBold" Margin="5"/>
-                <Image Source="{Binding ImageSource}" Stretch="Uniform" Grid.Row="1" Margin="5"/>
-                <TextBlock Text="{Binding Detected, StringFormat='Seated: {0}'}" FontSize="18" FontFamily="Segoe UI" FontWeight="SemiBold" Grid.Row="2" Margin="5 5 0 0"/>
-                <TextBlock Text="{Binding Confidence, StringFormat='Confidence: {0}'}" FontSize="18" FontFamily="Segoe UI" FontWeight="SemiBold" Grid.Row="3" Margin="5 0 0 0"/>
-                <TextBlock Text="{Binding GestureName, StringFormat='Gesture: {0}'}" FontSize="18" FontFamily="Segoe UI" FontWeight="SemiBold" Grid.Row="4" Margin="5 0 0 0"/>
-            </Grid>
-        </DataTemplate>
-
     </Window.Resources>
 
     <Grid Margin="10 0 10 0">
@@ -41,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <Image Grid.Row="0" Source="Images\Logo.png" HorizontalAlignment="Left" Stretch="Fill" Height="32" Width="81" Margin="0 10 0 5" />
-        <TextBlock Grid.Row="0" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="18">Discrete Gesture Basics</TextBlock>
+        <TextBlock Grid.Row="0" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Sty">Discrete Gesture Basics</TextBlock>
         <Image Grid.Row="0" Source="Images\Status.png" Stretch="None" HorizontalAlignment="Center" Margin="0 0 0 5" />
 
         <Grid x:Name="contentGrid" Grid.Row="1" >
@@ -56,30 +41,6 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Grid x:Name="buttonsGrid" Grid.Row="1" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-
-                <Button Name="canteens" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0">
-                    <StackPanel>
-                        <Image Source="Images\food.png" Width="50" Height="50" />
-                        <TextBlock>Cantinas</TextBlock>
-                    </StackPanel>
-                </Button>
-
-                <Button Name="parks" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0">
-                    <StackPanel>
-                        <Image Source="Images\food.png" Width="50" Height="50" />
-                        <TextBlock>Parques</TextBlock>
-                    </StackPanel>
-                </Button>
-            </Grid>
-
             <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="70,0">
                 <Viewbox x:Name="kinectBodyViewbox">
                     <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
@@ -88,73 +49,26 @@
             </StackPanel>
         </Grid>
 
-
-        
-        <!--
-        <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}">
-            <StatusBarItem Content="{Binding StatusText}" />
-        </StatusBar>-->
-
         <k:KinectRegion x:Name="kinectRegion" Height="250" Grid.Row="2" Background="Red">
             <Grid>
-                <ScrollViewer Name="scrollviewer1" Grid.Column="1" Grid.ColumnSpan="2" 
-                      HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
-                      PanningMode="HorizontalOnly"
-                      >
+                <ScrollViewer Name="scrollviewer1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" PanningMode="HorizontalOnly">
 
                     <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="1">
-                        <Grid Width="87" Height="90" Margin="10,10,10,10">
-                            <Rectangle Name="btn1" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 1" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,10,10">
-                            <Rectangle Name="btn2" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,10,10">
-                            <Rectangle Name="btn3" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <!--<Label Content="Station 3" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>-->
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,10,10">
-                            <Rectangle Name="btn4" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 4" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,10,10">
-                            <Rectangle Name="btn5" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 5" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,10,10">
-                            <Rectangle Name="btn6" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 6" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,10,10">
-                            <Rectangle Name="btn7" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 7" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,50,10">
-                            <Rectangle Name="btn8" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 8" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,50,10">
-                            <Rectangle Name="btn9" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 9" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,50,10">
-                            <Rectangle Name="btn10" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 10" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,50,10">
-                            <Rectangle Name="btn11" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 11" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,50,10">
-                            <Rectangle Name="btn12" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 12" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Width="87" Height="90" Margin="10,10,50,10">
-                            <Rectangle Name="btn13" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
-                            <Label Content="Station 13" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
-                        </Grid>
+                        <Controls:Tile Click="ClickMe_Click" Title="Cantinas" Width="100" Height="100" HorizontalTitleAlignment="Center">
+                            <Grid >
+                                <iconPacks:PackIconModern Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="FoodSilverware"/>
+                            </Grid>
+                        </Controls:Tile>
+                        <Controls:Tile Click="ClickMe_Click" Title="Cantinas" Width="100" Height="100" HorizontalTitleAlignment="Center">
+                            <Grid >
+                                <iconPacks:PackIconModern Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="FoodSilverware"/>
+                            </Grid>
+                        </Controls:Tile>
+                        <Controls:Tile Click="ClickMe_Click" Title="Cantinas" Width="100" Height="100" HorizontalTitleAlignment="Center">
+                            <Grid >
+                                <iconPacks:PackIconModern Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="FoodSilverware"/>
+                            </Grid>
+                        </Controls:Tile>
                     </StackPanel>
 
                 </ScrollViewer>
@@ -163,4 +77,4 @@
             </Grid>
         </k:KinectRegion>
     </Grid>
-</Window>
+</Controls:MetroWindow>

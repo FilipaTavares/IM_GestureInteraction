@@ -38,16 +38,11 @@ namespace GestureModality
         /// </summary>
         /// <param name="kinectSensor">Active sensor to initialize the VisualGestureBuilderFrameSource object with</param>
         /// <param name="gestureResultView">GestureResultView object to store gesture results of a single body to</param>
-        public GestureDetector(KinectSensor kinectSensor, GestureResultView gestureResultView, MainWindow window)
+        public GestureDetector(KinectSensor kinectSensor, MainWindow window)
         {
             if (kinectSensor == null)
             {
                 throw new ArgumentNullException("kinectSensor");
-            }
-
-            if (gestureResultView == null)
-            {
-                throw new ArgumentNullException("gestureResultView");
             }
 
             this.mainWindow = window;
@@ -58,8 +53,6 @@ namespace GestureModality
             mmic = new MmiCommunication("localhost", 8000, "User1", "GESTURES"); // MmiCommunication(string IMhost, int portIM, string UserOD, string thisModalityName)
 
             mmic.Send(lce.NewContextRequest());
-
-            this.GestureResultView = gestureResultView;
 
             // create the vgb source. The associated body tracking ID will be set when a valid body frame arrives from the sensor.
             this.vgbFrameSource = new VisualGestureBuilderFrameSource(kinectSensor, 0);
@@ -79,9 +72,6 @@ namespace GestureModality
                 vgbFrameSource.AddGestures(database.AvailableGestures);
             }
         }
-
-        /// <summary> Gets the GestureResultView object which stores the detector results for display in the UI </summary>
-        public GestureResultView GestureResultView { get; private set; }
 
         /// <summary>
         /// Gets or sets the body tracking ID associated with the current detector
@@ -199,8 +189,7 @@ namespace GestureModality
 
                         if (maxPair.Key != null)
                         {
-                            this.GestureResultView.UpdateGestureResult(true, maxPair.Value.Detected, maxPair.Value.Confidence, maxPair.Key.Name);
-                            this.gestureDetection(maxPair.Key.Name);
+                            this.gestureDetection(maxPair.Key.Name); // ver tbm confidence e detected
                         }
 
                         // ver depois mais gestos discretor da mesma gama tipo máximo é steer mas haver outros discretos steer detetados??
@@ -256,16 +245,12 @@ namespace GestureModality
         private void Source_TrackingIdLost(object sender, TrackingIdLostEventArgs e)
         {
             // update the GestureResultView object to show the 'Not Tracked' image in the UI
-            this.GestureResultView.UpdateGestureResult(false, false, 0.0f, "TESTE");
+
+            // TODO
         }
 
         private void gestureDetection(string gestureName)
         {
-            if (gestureName.Contains("Hungry"))
-            {
-                this.mainWindow.canteens.Background = Brushes.Green;
-            }
-
             string json = "{ \"recognized\": [" + "\"" + gestureName + "\"" + "] }";
 
             Console.WriteLine(json);
