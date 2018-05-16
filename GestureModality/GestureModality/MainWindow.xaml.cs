@@ -108,7 +108,7 @@ namespace GestureModality
             int maxBodies = 1;
 
             GestureResultView result = new GestureResultView(0, false, false, 0.0f);
-            this.gestureDetector = new GestureDetector(this.kinectSensor, result);
+            this.gestureDetector = new GestureDetector(this.kinectSensor, result, this);
 
             // split gesture results across the first two columns of the content grid
             ContentControl contentControl = new ContentControl();
@@ -313,7 +313,7 @@ namespace GestureModality
 
         private void ClickMe_Click(object sender, RoutedEventArgs e)
         {
-            //KinectStatus.Content = "Clicked me";
+            Console.WriteLine("CLICCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         }
     }
 }

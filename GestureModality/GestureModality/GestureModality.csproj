@@ -90,6 +90,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files\Microsoft SDKs\Kinect\v2.0_1409\Redist\WpfControls\Microsoft.Kinect.Wpf.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="mmisharp">
+      <HintPath>..\..\mmisharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -119,6 +122,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GestureDetector.cs" />
+    <Compile Include="GestureNames.cs" />
     <Compile Include="GestureResultView.cs" />
     <Compile Include="KinectBodyView.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -140,6 +144,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Images\food.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -8,8 +8,12 @@ namespace GestureModality
 {
     using System;
     using System.Collections.Generic;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
     using Microsoft.Kinect;
     using Microsoft.Kinect.VisualGestureBuilder;
+    using mmisharp;
 
     /// <summary>
     /// Gesture Detector class which listens for VisualGestureBuilderFrame events from the service
@@ -17,11 +21,9 @@ namespace GestureModality
     /// </summary>
     public class GestureDetector : IDisposable
     {
-        /// <summary> Path to the gesture database that was trained with VGB </summary>
-        private readonly string gestureDatabase = @"Database\Gestures.gbd";
+        private LifeCycleEvents lce;
 
-        /// <summary> Name of the discrete gesture in the database that we want to track </summary>
-        private readonly string seatedGestureName = "HungryTop";
+        private MmiCommunication mmic;
 
         /// <summary> Gesture frame source which should be tied to a body tracking ID </summary>
         private VisualGestureBuilderFrameSource vgbFrameSource = null;
@@ -29,12 +31,14 @@ namespace GestureModality
         /// <summary> Gesture frame reader which will handle gesture events coming from the sensor </summary>
         private VisualGestureBuilderFrameReader vgbFrameReader = null;
 
+        private MainWindow mainWindow;
+
         /// <summary>
         /// Initializes a new instance of the GestureDetector class along with the gesture frame source and reader
         /// </summary>
         /// <param name="kinectSensor">Active sensor to initialize the VisualGestureBuilderFrameSource object with</param>
         /// <param name="gestureResultView">GestureResultView object to store gesture results of a single body to</param>
-        public GestureDetector(KinectSensor kinectSensor, GestureResultView gestureResultView)
+        public GestureDetector(KinectSensor kinectSensor, GestureResultView gestureResultView, MainWindow window)
         {
             if (kinectSensor == null)
             {
@@ -45,6 +49,15 @@ namespace GestureModality
             {
                 throw new ArgumentNullException("gestureResultView");
             }
+
+            this.mainWindow = window;
+
+            //init LifeCycleEvents..
+            lce = new LifeCycleEvents("GESTURES", "FUSION", "gesture-1", "haptics", "command"); // LifeCycleEvents(string source, string target, string id, string medium, string mode)
+            //mmic = new MmiCommunication("localhost",9876,"User1", "ASR");  //PORT TO FUSION - uncomment this line to work with fusion later
+            mmic = new MmiCommunication("localhost", 8000, "User1", "GESTURES"); // MmiCommunication(string IMhost, int portIM, string UserOD, string thisModalityName)
+
+            mmic.Send(lce.NewContextRequest());
 
             this.GestureResultView = gestureResultView;
 
@@ -60,18 +73,10 @@ namespace GestureModality
                 this.vgbFrameReader.FrameArrived += this.Reader_GestureFrameArrived;
             }
 
-            // load the 'Seated' gesture from the gesture database
-            using (VisualGestureBuilderDatabase database = new VisualGestureBuilderDatabase(this.gestureDatabase))
+            // load the all gestures from the gesture database
+            using (VisualGestureBuilderDatabase database = new VisualGestureBuilderDatabase(GestureNames.gestureDatabase))
             {
-                // we could load all available gestures in the database with a call to vgbFrameSource.AddGestures(database.AvailableGestures), 
-                // but for this program, we only want to track one discrete gesture from the database, so we'll load it by name
-                foreach (Gesture gesture in database.AvailableGestures)
-                {
-                    if (gesture.Name.Equals(this.seatedGestureName))
-                    {
-                        this.vgbFrameSource.AddGesture(gesture);
-                    }
-                }
+                vgbFrameSource.AddGestures(database.AvailableGestures);
             }
         }
 
@@ -163,15 +168,51 @@ namespace GestureModality
             {
                 if (frame != null)
                 {
+
+                    // percorrer dicionario à procura do gesto discreto com maior confiança
+                    // não gosto mas como escolher o melhor gesto?
+
                     // get the discrete gesture results which arrived with the latest frame
                     IReadOnlyDictionary<Gesture, DiscreteGestureResult> discreteResults = frame.DiscreteGestureResults;
 
+                    // get the discrete gesture results which arrived with the latest frame
+                    IReadOnlyDictionary<Gesture, ContinuousGestureResult> continuousResults = frame.ContinuousGestureResults;
+
                     if (discreteResults != null)
                     {
-                        // we only have one gesture in this source object, but you can get multiple gestures
+                        //Console.WriteLine("PRINT DO DIC DISCRETO");
+                        // PRINT DE TODOS OS GESTOS DISCRETOS DA DATABASE --> ACHAVA QUE ERA SÓ RECONHECIDOS MAS AFINAL NÃO
+
+                        float confidence = 0.9F;
+                        KeyValuePair<Gesture, DiscreteGestureResult> maxPair = new KeyValuePair<Gesture, DiscreteGestureResult>();
+
+                        foreach (KeyValuePair<Gesture, DiscreteGestureResult> kvp in discreteResults)
+                        {
+                          //  Console.WriteLine(kvp.Key.Name + " ----> " +  kvp.Value.Detected + " ----> " + kvp.Value.Confidence);
+
+                            if (kvp.Value.Detected && kvp.Value.Confidence > confidence)
+                            {
+                                confidence = kvp.Value.Confidence;
+                                maxPair = kvp;
+                            }
+                        }
+
+                        if (maxPair.Key != null)
+                        {
+                            this.GestureResultView.UpdateGestureResult(true, maxPair.Value.Detected, maxPair.Value.Confidence, maxPair.Key.Name);
+                            this.gestureDetection(maxPair.Key.Name);
+                        }
+
+                        // ver depois mais gestos discretor da mesma gama tipo máximo é steer mas haver outros discretos steer detetados??
+                        //List<KeyValuePair<Gesture, DiscreteGestureResult>> list = discreteResults.Where(pair => pair.Value.Detected && pair.Value.Confidence > 0.5).ToList();
+
+                        /*
+
+                        // ver se se pode eliminar este for caso não existam gestos que possam ser detetados mas que não existam 
+                        //na base de dados - tirei mas pode ser preciso
                         foreach (Gesture gesture in this.vgbFrameSource.Gestures)
                         {
-                            if (gesture.Name.Equals(this.seatedGestureName) && gesture.GestureType == GestureType.Discrete)
+                            if (gesture.Name.Equals(GestureNames.hungryTop) && gesture.GestureType == GestureType.Discrete)
                             {
                                 DiscreteGestureResult result = null;
                                 discreteResults.TryGetValue(gesture, out result);
@@ -183,7 +224,26 @@ namespace GestureModality
                                 }
                             }
                         }
+                        */
                     }
+
+                    /*
+
+                    if (continuousResults != null)
+                    {
+                        if (gesture.Name.Equals(this.steerProgressGestureName) && gesture.GestureType == GestureType.Continuous)
+                        {
+                            ContinuousGestureResult result = null;
+                            continuousResults.TryGetValue(gesture, out result);
+
+                            if (result != null)
+                            {
+                                steerProgress = result.Progress;
+                            }
+                        }
+                    }
+                }
+                */
                 }
             }
         }
@@ -197,6 +257,21 @@ namespace GestureModality
         {
             // update the GestureResultView object to show the 'Not Tracked' image in the UI
             this.GestureResultView.UpdateGestureResult(false, false, 0.0f, "TESTE");
+        }
+
+        private void gestureDetection(string gestureName)
+        {
+            if (gestureName.Contains("Hungry"))
+            {
+                this.mainWindow.canteens.Background = Brushes.Green;
+            }
+
+            string json = "{ \"recognized\": [" + "\"" + gestureName + "\"" + "] }";
+
+            Console.WriteLine(json);
+
+            var exNot = lce.ExtensionNotification(0 + "", 10 + "", 0, json);
+            mmic.Send(exNot);
         }
     }
 }

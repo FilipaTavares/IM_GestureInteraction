@@ -28,7 +28,7 @@ namespace GestureModality
         private readonly ImageSource notTrackedImage = new BitmapImage(new Uri(@"Images\NotTracked.png", UriKind.Relative));
 
         /// <summary> Array of brush colors to use for a tracked body; array position corresponds to the body colors used in the KinectBodyView class </summary>
-        private readonly Brush[] trackedColors = new Brush[] { Brushes.Red, Brushes.Orange, Brushes.Green, Brushes.Blue, Brushes.Indigo, Brushes.Violet };
+        private readonly Brush[] trackedColors = new Brush[] { Brushes.Green, Brushes.Blue, Brushes.Indigo, Brushes.Violet };
 
         /// <summary> Brush color to use as background in the UI </summary>
         private Brush bodyColor = Brushes.Gray;
@@ -57,6 +57,8 @@ namespace GestureModality
         /// <param name="isTracked">True, if the body is currently tracked</param>
         /// <param name="detected">True, if the gesture is currently detected for the associated body</param>
         /// <param name="confidence">Confidence value for detection of the 'Seated' gesture</param>
+        /// ver body index pode ser index do quadrado de senhas ou cantinas etc ou assim para mudar de cor 
+
         public GestureResultView(int bodyIndex, bool isTracked, bool detected, float confidence)
         {
             this.BodyIndex = bodyIndex;

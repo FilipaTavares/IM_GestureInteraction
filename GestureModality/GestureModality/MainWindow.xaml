@@ -6,7 +6,7 @@
         xmlns:k="http://schemas.microsoft.com/kinect/2014"
         xmlns:local="clr-namespace:GestureModality"
         Title="Gesture Modality"
-        Height="650" Width="750"
+        Height="1000" Width="1500"
         Closing="MainWindow_Closing">
     <Window.Resources>
         <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
@@ -56,6 +56,30 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
+            <Grid x:Name="buttonsGrid" Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <Button Name="canteens" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0">
+                    <StackPanel>
+                        <Image Source="Images\food.png" Width="50" Height="50" />
+                        <TextBlock>Cantinas</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button Name="parks" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0">
+                    <StackPanel>
+                        <Image Source="Images\food.png" Width="50" Height="50" />
+                        <TextBlock>Parques</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
             <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="70,0">
                 <Viewbox x:Name="kinectBodyViewbox">
                     <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
@@ -63,14 +87,79 @@
                 <TextBlock Text="This program tracks the closest person to the kinect." TextWrapping="Wrap" Margin="5 10 5 5" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"/>
             </StackPanel>
         </Grid>
+
+
+        
         <!--
         <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}">
             <StatusBarItem Content="{Binding StatusText}" />
         </StatusBar>-->
 
-        <k:KinectRegion x:Name="kinectRegion" Height="100" Grid.Row="2" Background="Red">
+        <k:KinectRegion x:Name="kinectRegion" Height="250" Grid.Row="2" Background="Red">
             <Grid>
-                <k:KinectUserViewer Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <ScrollViewer Name="scrollviewer1" Grid.Column="1" Grid.ColumnSpan="2" 
+                      HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
+                      PanningMode="HorizontalOnly"
+                      >
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="1">
+                        <Grid Width="87" Height="90" Margin="10,10,10,10">
+                            <Rectangle Name="btn1" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 1" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,10,10">
+                            <Rectangle Name="btn2" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,10,10">
+                            <Rectangle Name="btn3" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <!--<Label Content="Station 3" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>-->
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,10,10">
+                            <Rectangle Name="btn4" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 4" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,10,10">
+                            <Rectangle Name="btn5" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 5" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,10,10">
+                            <Rectangle Name="btn6" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 6" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,10,10">
+                            <Rectangle Name="btn7" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 7" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,50,10">
+                            <Rectangle Name="btn8" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 8" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,50,10">
+                            <Rectangle Name="btn9" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 9" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,50,10">
+                            <Rectangle Name="btn10" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 10" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,50,10">
+                            <Rectangle Name="btn11" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 11" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,50,10">
+                            <Rectangle Name="btn12" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 12" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Width="87" Height="90" Margin="10,10,50,10">
+                            <Rectangle Name="btn13" Fill="#FFF39999" RadiusX="10" RadiusY="10" />
+                            <Label Content="Station 13" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
+                        </Grid>
+                    </StackPanel>
+
+                </ScrollViewer>
+
+                <k:KinectUserViewer Height="100" HorizontalAlignment="Right" VerticalAlignment="Top" />
             </Grid>
         </k:KinectRegion>
     </Grid>
