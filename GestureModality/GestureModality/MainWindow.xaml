@@ -9,7 +9,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Title="Gesture Modality"
-        Height="1000" Width="1500"
+        Height="500" Width="700"
         Closing="MainWindow_Closing">
     <Window.Resources>
         <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
@@ -17,63 +17,91 @@
         <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2" />
     </Window.Resources>
 
-    <Grid Margin="10 0 10 0">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="35*" />
+            <RowDefinition Height="55*" />
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="0" Source="Images\Logo.png" HorizontalAlignment="Left" Stretch="Fill" Height="32" Width="81" Margin="0 10 0 5" />
-        <TextBlock Grid.Row="0" Margin="0 0 -1 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Sty">Discrete Gesture Basics</TextBlock>
-        <Image Grid.Row="0" Source="Images\Status.png" Stretch="None" HorizontalAlignment="Center" Margin="0 0 0 5" />
+        <TextBlock Margin="5" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource HeaderFontFamily}" FontSize="{DynamicResource HeaderFontSize}">Assistente Virtual</TextBlock>
+        <Image Grid.Row="0" Source="Images\logo_ua.png" VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="7" />
+
+        <!--<Image Grid.Row="0" Source="Images\Status.png" Stretch="None" HorizontalAlignment="Center" Margin="0 0 0 5" />-->
 
         <Grid x:Name="contentGrid" Grid.Row="1" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="90*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="194*"/>
-                <ColumnDefinition Width="42*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="70,0">
-                <Viewbox x:Name="kinectBodyViewbox">
-                    <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
-                </Viewbox>
-                <TextBlock Text="This program tracks the closest person to the kinect." TextWrapping="Wrap" Margin="5 10 5 5" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"/>
-            </StackPanel>
+            <TextBlock Grid.Row="1" x:Name="kinectStatus" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{DynamicResource SubHeaderFontSize}"></TextBlock>
+
+            <Border Margin="5" Padding="5" Grid.Column="2" Grid.Row="0" BorderBrush="SteelBlue" BorderThickness="2" CornerRadius="0"
+          VerticalAlignment="Stretch">
+                <StackPanel Orientation="Vertical"  HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                    <Viewbox x:Name="kinectBodyViewbox" Width="200" Height="200">
+                        <Image Source="{Binding ImageSource}"/>
+                    </Viewbox>
+                    <TextBlock Text="This program tracks the closest person to the kinect." TextWrapping="Wrap" Margin="5 10 5 5" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="14"/>
+                </StackPanel>
+            </Border>
         </Grid>
 
-        <k:KinectRegion x:Name="kinectRegion" Height="250" Grid.Row="2" Background="Red">
-            <Grid>
-                <ScrollViewer Name="scrollviewer1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" PanningMode="HorizontalOnly">
+        <k:KinectRegion x:Name="kinectRegion" Grid.Row="2" Background="LightGray">
+            <Grid Margin="10 0 10 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="50*" />
+                </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="1">
-                        <Controls:Tile Click="ClickMe_Click" Title="Cantinas" Width="100" Height="100" HorizontalTitleAlignment="Center">
-                            <Grid >
-                                <iconPacks:PackIconModern Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="FoodSilverware"/>
-                            </Grid>
-                        </Controls:Tile>
-                        <Controls:Tile Click="ClickMe_Click" Title="Cantinas" Width="100" Height="100" HorizontalTitleAlignment="Center">
-                            <Grid >
-                                <iconPacks:PackIconModern Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="FoodSilverware"/>
-                            </Grid>
-                        </Controls:Tile>
-                        <Controls:Tile Click="ClickMe_Click" Title="Cantinas" Width="100" Height="100" HorizontalTitleAlignment="Center">
-                            <Grid >
-                                <iconPacks:PackIconModern Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="FoodSilverware"/>
-                            </Grid>
-                        </Controls:Tile>
-                    </StackPanel>
+                <UniformGrid Columns="3" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Controls:Tile x:Name="cantinas" Click="selectCantinas" Title="Cantinas" Width="Auto" Height="Auto" HorizontalTitleAlignment="Left" HorizontalAlignment="Stretch" Panel.ZIndex="0" VerticalAlignment="Stretch" Margin="0,10,20,10" TitleFontSize="20" FontFamily="{DynamicResource HeaderFontFamily}">
+                        <Grid>
+                            <iconPacks:PackIconModern Width="40" Height="40" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Kind="FoodSilverware"/>
+                        </Grid>
+                    </Controls:Tile>
 
-                </ScrollViewer>
+                    <Controls:Tile x:Name="parques" Click="selectParques" Title="Parques" Width="Auto" Height="Auto" HorizontalTitleAlignment="Left" HorizontalAlignment="Stretch" Panel.ZIndex="0" VerticalAlignment="Stretch" Margin="0,10,20,10" TitleFontSize="20" FontFamily="{DynamicResource HeaderFontFamily}">
+                        <Grid>
+                            <iconPacks:PackIconModern Width="40" Height="40" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Kind="SignParking"/>
+                        </Grid>
+                    </Controls:Tile>
 
-                <k:KinectUserViewer Height="100" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                    <Controls:Tile x:Name="senhas" Click="selectSenhas" Title="Senhas" Width="Auto" Height="Auto" HorizontalTitleAlignment="Left" HorizontalAlignment="Stretch" Panel.ZIndex="0" VerticalAlignment="Stretch" Margin="0,10,20,10" TitleFontSize="20" FontFamily="{DynamicResource HeaderFontFamily}">
+                        <Grid>
+                            <iconPacks:PackIconModern Width="40" Height="40" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Kind="Ticket"/>
+                        </Grid>
+                    </Controls:Tile>
+                </UniformGrid>
+
+                <UniformGrid Columns="3" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Controls:Tile x:Name="noticias" Click="selectNoticias" Title="Notícias UA" Width="Auto" Height="Auto" HorizontalTitleAlignment="Left" HorizontalAlignment="Stretch" Panel.ZIndex="0" VerticalAlignment="Stretch" Margin="0,10,20,10" TitleFontSize="20" FontFamily="{DynamicResource HeaderFontFamily}">
+                        <Grid>
+                            <iconPacks:PackIconFontAwesome Width="40" Height="40" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Kind="NewspaperRegular"/>
+                        </Grid>
+                    </Controls:Tile>
+
+                    <Controls:Tile x:Name="tempo" Click="selectTempo" Title="Tempo Aveiro" Width="Auto" Height="Auto" HorizontalTitleAlignment="Left" HorizontalAlignment="Stretch" Panel.ZIndex="0" VerticalAlignment="Stretch" Margin="0,10,20,10" TitleFontSize="20" FontFamily="{DynamicResource HeaderFontFamily}">
+                        <Grid>
+                            <iconPacks:PackIconModern Width="40" Height="40" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Kind="WeatherSun"/>
+                        </Grid>
+                    </Controls:Tile>
+
+                    <Controls:Tile x:Name="ajuda" Click="selectAjuda" Title="Ajuda" Width="Auto" Height="Auto" HorizontalTitleAlignment="Left" HorizontalAlignment="Stretch" Panel.ZIndex="0" VerticalAlignment="Stretch" Margin="0,10,20,10" TitleFontSize="20" FontFamily="{DynamicResource HeaderFontFamily}">
+                        <Grid>
+                            <iconPacks:PackIconFontAwesome Width="40" Height="40" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Kind="QuestionCircleRegular"/>
+                        </Grid>
+                    </Controls:Tile>
+                </UniformGrid>
             </Grid>
         </k:KinectRegion>
     </Grid>

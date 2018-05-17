@@ -29,7 +29,7 @@ namespace GestureModality
     /// <summary>
     /// Interaction logic for the MainWindow
     /// </summary>
-    public partial class MainWindow : MetroWindow, INotifyPropertyChanged
+    public partial class MainWindow : MetroWindow
     {
         /// <summary> Active Kinect sensor </summary>
         private KinectSensor kinectSensor = null;
@@ -40,9 +40,6 @@ namespace GestureModality
         /// <summary> Reader for body frames </summary>
         private BodyFrameReader bodyFrameReader = null;
 
-        /// <summary> Current status text to display </summary>
-        private string statusText = null;
-
         /// <summary> KinectBodyView object which handles drawing the Kinect bodies to a View box in the UI </summary>
         private KinectBodyView kinectBodyView = null;
 
@@ -51,6 +48,10 @@ namespace GestureModality
         private Body currentTrackedBody = null;
 
         private ulong currentTrackingId = 0;
+
+        private static readonly string noKinect = "Kinect não conectada";
+
+        private static readonly string availableKinect = "Kinect conectada";
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -68,9 +69,10 @@ namespace GestureModality
             // open the sensor
             this.kinectSensor.Open();
 
+
             // set the status text
-            this.StatusText = this.kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText
-                                                            : Properties.Resources.NoSensorStatusText;
+            this.kinectStatus.Text = this.kinectSensor.IsAvailable ? availableKinect
+                                                            : noKinect;
 
             // open the reader for the body frames
             this.bodyFrameReader = this.kinectSensor.BodyFrameSource.OpenReader();
@@ -94,36 +96,6 @@ namespace GestureModality
             this.kinectBodyViewbox.DataContext = this.kinectBodyView;
 
             this.gestureDetector = new GestureDetector(this.kinectSensor, this);
-        }
-
-        /// <summary>
-        /// INotifyPropertyChangedPropertyChanged event to allow window controls to bind to changeable data
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Gets or sets the current status text to display
-        /// </summary>
-        public string StatusText
-        {
-            get
-            {
-                return this.statusText;
-            }
-
-            set
-            {
-                if (this.statusText != value)
-                {
-                    this.statusText = value;
-
-                    // notify any bound elements that the text has changed
-                    if (this.PropertyChanged != null)
-                    {
-                        this.PropertyChanged(this, new PropertyChangedEventArgs("StatusText"));
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -163,10 +135,9 @@ namespace GestureModality
         private void Sensor_IsAvailableChanged(object sender, IsAvailableChangedEventArgs e)
         {
             // on failure, set the status text
-            this.StatusText = this.kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText
-                                                            : Properties.Resources.SensorNotAvailableStatusText;
+            this.kinectStatus.Text = this.kinectSensor.IsAvailable ? availableKinect
+                                                            : noKinect;
         }
-
 
         /// <summary>
         /// Returns the length of a vector from origin
@@ -287,9 +258,34 @@ namespace GestureModality
             }
         }
 
-        private void ClickMe_Click(object sender, RoutedEventArgs e)
+        private void selectCantinas(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("CLICCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+            MessageBox.Show("Cantinas");
+        }
+
+        private void selectParques(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Parques");
+        }
+
+        private void selectSenhas(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Senhas");
+        }
+
+        private void selectNoticias(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Noticias");
+        }
+
+        private void selectTempo(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Tempo");
+        }
+
+        private void selectAjuda(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Ajuda");
         }
     }
 }
