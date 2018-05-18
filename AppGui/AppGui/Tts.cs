@@ -12,7 +12,7 @@ namespace AppGui
     {
         SpeechSynthesizer tts = null;
         static SoundPlayer player = new SoundPlayer();
-        private SpeachClient speachClient;
+        //private SpeachClient speachClient;
         private Random random;
         private string lastSentence = "Ainda não pediste nada";
 
@@ -93,16 +93,16 @@ namespace AppGui
             //set function to play audio after synthesis is complete
             tts.SpeakCompleted += new EventHandler<SpeakCompletedEventArgs>(tts_SpeakCompleted);
 
-            speachClient = new SpeachClient(greathingsCallback);
+            //speachClient = new SpeachClient(greathingsCallback);
 
-            speachClient.connect();
+            //speachClient.connect();
 
         }
 
         public void close()
         {
             //close some stuff
-            speachClient.close();
+            //speachClient.close();
         }
 
         /*
@@ -124,7 +124,7 @@ namespace AppGui
             tts.SpeakAsync(text);
 
             //attention blocking method, another thread?
-            speachClient.sendTtsStart();
+            //speachClient.sendTtsStart();
         }
 
         public void SpeakRepeat()
@@ -163,7 +163,7 @@ namespace AppGui
         
 
         public void addNewsToGrammar(List<string> news) {
-            speachClient.sendDynamicNews(news);
+            //speachClient.sendDynamicNews(news);
         }
 
         /*
@@ -181,7 +181,7 @@ namespace AppGui
                     player.Stream.Position = 0;
                     player.PlaySync();
                     player.Stream = null;  //  NEW 2015
-                    speachClient.sendTtsStop();
+                    //speachClient.sendTtsStop();
                 });
 
             }
