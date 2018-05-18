@@ -175,7 +175,10 @@ namespace GestureModality
 
                     if (discreteResults != null) { 
                         string result = gFrameHandler.handleFrame(discreteResults);
-                        if (result!=null) Console.WriteLine("Result: " + result);
+                        if (result != null) {
+                            gestureSelection(result.Split('_')[0]);
+                            Console.WriteLine("Result: " + result);
+                        }
                     }
                 }
             }
@@ -209,11 +212,21 @@ namespace GestureModality
             switch (selection)
             {
                 case "CANTEENS":
+                    json.Append("\"TYPE3\", \"Jantar\" ] }");
                     break;
                 case "SAS":
                     string subtype = "SUBTYPE1";
                     string type = "TYPE1";
                     json.Append("\"" + type + "\"," + "\"" + subtype + "\"" + "] }");
+                    break;
+                case "SAC":
+                    json.Append("\"TYPE1\" ] }");
+                    break;
+                case "NEWS":
+                    json.Append("\"TYPE1\" ] }");
+                    break;
+                case "WEATHER":
+                    json.Append("\"TYPE1\",\"tomorrow\",\"tomorrow\",\"\" ] }");
                     break;
             }
 

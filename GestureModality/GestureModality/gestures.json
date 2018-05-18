@@ -1,25 +1,25 @@
 ﻿{
-  "News": [
+  "NEWS": [
     { "NewsClose": 0.4 },
-    { "NewsOpen": 0.8 }
+    { "NewsOpen": 0.7 }
   ],
-  "Tickets": [
-    { "TicketsTop": 0.7 },
+  "SAC": [
+    { "TicketsTop": 0.65 },
     { "TicketsBottom": 0.4 }
   ],
-  "Canteens": [
-    { "CanteensTop": 0.8 },
+  "CANTEENS": [
+    { "CanteensTop": 0.7 },
     { "CanteensBottom": 0.35 }
   ],
-  "Stering_LR": [
+  "SAS_0": [
     { "Stering_Left": 0.75 },
     { "Stering_Right": 0.9 }
   ],
-  "Stering_RL": [
+  "SAS_1": [
     { "Stering_Right": 0.9 },
     { "Stering_Left": 0.75 }
   ],
-  "Weather": [
+  "WEATHER": [
     { "Weather_Left": 0.75 },
     { "Weather_Right": 0.75 }
   ]
