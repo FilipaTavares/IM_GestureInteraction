@@ -25,6 +25,8 @@ namespace GestureModality
 
         private MmiCommunication mmic;
 
+        private GestureFrameHandler gFrameHandler;
+
         /// <summary> Gesture frame source which should be tied to a body tracking ID </summary>
         private VisualGestureBuilderFrameSource vgbFrameSource = null;
 
@@ -46,6 +48,9 @@ namespace GestureModality
             }
 
             this.mainWindow = window;
+            this.gFrameHandler = new GestureFrameHandler();
+            this.gFrameHandler.load("gestures.json");
+
 
             //init LifeCycleEvents..
             lce = new LifeCycleEvents("GESTURES", "FUSION", "gesture-1", "haptics", "command"); // LifeCycleEvents(string source, string target, string id, string medium, string mode)
@@ -168,71 +173,10 @@ namespace GestureModality
                     // get the discrete gesture results which arrived with the latest frame
                     IReadOnlyDictionary<Gesture, ContinuousGestureResult> continuousResults = frame.ContinuousGestureResults;
 
-                    if (discreteResults != null)
-                    {
-                        //Console.WriteLine("PRINT DO DIC DISCRETO");
-                        // PRINT DE TODOS OS GESTOS DISCRETOS DA DATABASE --> ACHAVA QUE ERA SÓ RECONHECIDOS MAS AFINAL NÃO
-
-                        float confidence = 0.9F;
-                        KeyValuePair<Gesture, DiscreteGestureResult> maxPair = new KeyValuePair<Gesture, DiscreteGestureResult>();
-
-                        foreach (KeyValuePair<Gesture, DiscreteGestureResult> kvp in discreteResults)
-                        {
-                          //  Console.WriteLine(kvp.Key.Name + " ----> " +  kvp.Value.Detected + " ----> " + kvp.Value.Confidence);
-
-                            if (kvp.Value.Detected && kvp.Value.Confidence > confidence)
-                            {
-                                confidence = kvp.Value.Confidence;
-                                maxPair = kvp;
-                            }
-                        }
-
-                        if (maxPair.Key != null)
-                        {
-                            this.gestureDetection(maxPair.Key.Name); // ver tbm confidence e detected
-                        }
-
-                        // ver depois mais gestos discretor da mesma gama tipo máximo é steer mas haver outros discretos steer detetados??
-                        //List<KeyValuePair<Gesture, DiscreteGestureResult>> list = discreteResults.Where(pair => pair.Value.Detected && pair.Value.Confidence > 0.5).ToList();
-
-                        /*
-
-                        // ver se se pode eliminar este for caso não existam gestos que possam ser detetados mas que não existam 
-                        //na base de dados - tirei mas pode ser preciso
-                        foreach (Gesture gesture in this.vgbFrameSource.Gestures)
-                        {
-                            if (gesture.Name.Equals(GestureNames.hungryTop) && gesture.GestureType == GestureType.Discrete)
-                            {
-                                DiscreteGestureResult result = null;
-                                discreteResults.TryGetValue(gesture, out result);
-
-                                if (result != null)
-                                {
-                                    // update the GestureResultView object with new gesture result values
-                                    this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence, gesture.Name);
-                                }
-                            }
-                        }
-                        */
+                    if (discreteResults != null) { 
+                    string result = gFrameHandler.handleFrame(discreteResults);
+                    if (result!=null) Console.WriteLine("Result: " + result);
                     }
-
-                    /*
-
-                    if (continuousResults != null)
-                    {
-                        if (gesture.Name.Equals(this.steerProgressGestureName) && gesture.GestureType == GestureType.Continuous)
-                        {
-                            ContinuousGestureResult result = null;
-                            continuousResults.TryGetValue(gesture, out result);
-
-                            if (result != null)
-                            {
-                                steerProgress = result.Progress;
-                            }
-                        }
-                    }
-                }
-                */
                 }
             }
         }

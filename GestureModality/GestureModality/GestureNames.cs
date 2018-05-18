@@ -8,6 +8,13 @@ namespace GestureModality
 {
     static class GestureNames
     {
+
+        public readonly static string HUNGRY = "Hungry";
+        public readonly static string PARKING = "Parking";
+        public readonly static string TICKETS = "Tickets";
+        public readonly static string NEWS = "News";
+        public readonly static string WEATHER = "Weather";
+
         /// <summary> Path to the gesture database that was trained with VGB </summary>
         public readonly static string gestureDatabase = @"Database\Gestures.gbd";
         
