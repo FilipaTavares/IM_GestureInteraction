@@ -35,6 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.4\lib\net46\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Speech, Version=11.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft SDKs\Speech\v11.0\Assembly\Microsoft.Speech.dll</HintPath>
+    </Reference>
     <Reference Include="mmisharp">
       <HintPath>..\..\mmisharp\mmisharp\bin\Debug\mmisharp.dll</HintPath>
     </Reference>
@@ -43,6 +53,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,6 +74,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Answers.cs" />
+    <Compile Include="Pages\CanteensPage.xaml.cs">
+      <DependentUpon>CanteensPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClientNews.cs" />
+    <Compile Include="ClientWeather.cs" />
+    <Compile Include="Data\NewsData.cs" />
+    <Compile Include="Data\WeatherData.cs" />
+    <Compile Include="GestureManager.cs" />
+    <Compile Include="Pages\ParksPage.xaml.cs">
+      <DependentUpon>ParksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PresentationPage.xaml.cs">
+      <DependentUpon>PresentationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SpeachClient.cs" />
+    <Compile Include="ClientSAC.cs" />
+    <Compile Include="Data\CanteenData.cs" />
+    <Compile Include="ClientCanteen.cs" />
+    <Compile Include="ClientSAS.cs" />
+    <Compile Include="Data\ParkData.cs" />
+    <Compile Include="ModalitiesManager.cs" />
+    <Compile Include="Data\TicketData.cs" />
+    <Compile Include="Tts.cs" />
+    <Page Include="Pages\CanteensPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +114,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\ParksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PresentationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -100,6 +149,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gif\speaker.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Gif\speaker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gif\speaker.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gif\waveform.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo_ua.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

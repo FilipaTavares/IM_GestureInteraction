@@ -258,5 +258,24 @@ namespace GestureModality
             var exNot = lce.ExtensionNotification(0 + "", 10 + "", 0, json);
             mmic.Send(exNot);
         }
+
+        public void gestureSelection(string selection)
+        {
+            StringBuilder json = new StringBuilder("{ \"type\": \"NORMAL\",\"confidence\": \"GOOD\",\"recognized\": [" + "\"" + selection + "\",");
+            switch (selection)
+            {
+                case "CANTEENS":
+                    break;
+                case "SAS":
+                    string subtype = "SUBTYPE1";
+                    string type = "TYPE1";
+                    json.Append("\"" + type + "\"," + "\"" + subtype + "\"" + "] }");
+                    break;
+            }
+
+            Console.WriteLine(json.ToString());
+            var exNot = lce.ExtensionNotification(0 + "", 10 + "", 0, json.ToString());
+            mmic.Send(exNot);
+        }
     }
 }

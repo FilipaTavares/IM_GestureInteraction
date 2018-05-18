@@ -265,7 +265,7 @@ namespace GestureModality
 
         private void selectParques(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Parques");
+            gestureDetector.gestureSelection("SAS");
         }
 
         private void selectSenhas(object sender, RoutedEventArgs e)
