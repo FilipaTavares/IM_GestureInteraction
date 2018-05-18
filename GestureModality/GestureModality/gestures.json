@@ -1,6 +1,6 @@
 ﻿{
   "News": [
-    { "NewsClose": 0.7 },
+    { "NewsClose": 0.4 },
     { "NewsOpen": 0.8 }
   ],
   "Tickets": [

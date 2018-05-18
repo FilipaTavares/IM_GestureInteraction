@@ -58,7 +58,7 @@ namespace GestureModality
                 }
             }*/
 
-            if (!firstFrame && ++frames > 60) {
+            if (!firstFrame && ++frames > 90) {
                 Console.WriteLine("State reseted affter " + frames);
                 resetState();
                 

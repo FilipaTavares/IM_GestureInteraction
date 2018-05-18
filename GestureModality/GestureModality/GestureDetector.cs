@@ -174,8 +174,8 @@ namespace GestureModality
                     IReadOnlyDictionary<Gesture, ContinuousGestureResult> continuousResults = frame.ContinuousGestureResults;
 
                     if (discreteResults != null) { 
-                    string result = gFrameHandler.handleFrame(discreteResults);
-                    if (result!=null) Console.WriteLine("Result: " + result);
+                        string result = gFrameHandler.handleFrame(discreteResults);
+                        if (result!=null) Console.WriteLine("Result: " + result);
                     }
                 }
             }
