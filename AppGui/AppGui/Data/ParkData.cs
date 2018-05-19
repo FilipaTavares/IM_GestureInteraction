@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppGui.Data
 {
-    class ParkData
+    public class ParkData
     {
         private string nome;
         private int capacidade;

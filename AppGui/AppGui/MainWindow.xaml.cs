@@ -51,23 +51,5 @@ namespace AppGui
             dManager.handleIMcommand(com);
 
         }
-
-        public void NavigateToPageParks(int i)
-        {
-            if (i == 0)
-            {
-                ParksPage page = new ParksPage();
-                this.NavigationService.Navigate(page);
-            }
-
-            if (i == 1)
-            {
-                CanteensPage page = new CanteensPage();
-                this.NavigationService.Navigate(page);
-            }
-
-            //MessageBox.Show("todos os parques");
-        }
-
     }
 }

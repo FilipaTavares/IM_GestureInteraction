@@ -106,5 +106,13 @@
                 clientsWaiting = value;
             }
         }
+
+        public string IconPath
+        {
+            get
+            {
+                return "..\\Images\\" + letter.ToUpper() + ".png";
+            }
+        }
     }
 }

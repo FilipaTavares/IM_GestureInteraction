@@ -81,6 +81,7 @@ namespace AppGui
                 if (args.Length == 1 && args[0].ToString().Equals("TYPE1"))
                 {
                     dManager.manageDialogueSAC(getAllTicketsInfo(json));
+                    dManager.displaySAC(getAllTicketsInfo(json));
                 }
 
                 else if (args.Length == 1 && args[0].ToString().Equals("TYPE5"))
@@ -99,6 +100,67 @@ namespace AppGui
             else
             {
                 dManager.manageDialogueSAC("service not available", false);
+
+                List<TicketData> l = new List<TicketData>();
+
+                TicketData data = new TicketData("A", "DESCRIÇÃO FIXE", true);
+                data.Latest = 100;
+                data.AverageAtendingTime = 150;
+                data.AverageWaitingTime = 200;
+                data.ClientsWaiting = 20;
+
+                l.Add(data);
+
+
+                data = new TicketData("C", "DESCRIÇÃO FIXE", true);
+                data.Latest = 100;
+                data.AverageAtendingTime = 150;
+                data.AverageWaitingTime = 200;
+                data.ClientsWaiting = 20;
+
+                l.Add(data);
+
+                data = new TicketData("D", "DESCRIÇÃO FIXE", true);
+                data.Latest = 100;
+                data.AverageAtendingTime = 150;
+                data.AverageWaitingTime = 200;
+                data.ClientsWaiting = 20;
+
+                l.Add(data);
+
+                data = new TicketData("F", "DESCRIÇÃO FIXE", true);
+                data.Latest = 100;
+                data.AverageAtendingTime = 150;
+                data.AverageWaitingTime = 200;
+                data.ClientsWaiting = 20;
+
+                l.Add(data);
+
+                data = new TicketData("G", "DESCRIÇÃO FIXE", true);
+                data.Latest = 100;
+                data.AverageAtendingTime = 150;
+                data.AverageWaitingTime = 200;
+                data.ClientsWaiting = 20;
+
+                l.Add(data);
+
+                data = new TicketData("H", "DESCRIÇÃO FIXE", true);
+                data.Latest = 100;
+                data.AverageAtendingTime = 150;
+                data.AverageWaitingTime = 200;
+                data.ClientsWaiting = 20;
+
+                l.Add(data);
+
+                data = new TicketData("X", "DESCRIÇÃO FIXE", true);
+                data.Latest = 100;
+                data.AverageAtendingTime = 150;
+                data.AverageWaitingTime = 200;
+                data.ClientsWaiting = 20;
+
+                l.Add(data);
+
+                dManager.displaySAC(l);
             }
         }
 

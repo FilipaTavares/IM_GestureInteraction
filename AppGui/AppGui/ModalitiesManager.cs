@@ -149,14 +149,21 @@ namespace AppGui
 
         public void displayParks(List<ParkData> parks)
         {
-            //ParksPage page = new ParksPage();
-
             window.Dispatcher.BeginInvoke((Action)(() =>
             {
-                window.NavigateToPageParks(i);
-                i++;
+                ParksPage page = new ParksPage(parks);
+                window.NavigationService.Navigate(page);
             }));
 
+        }
+
+        public void displaySAC(List<TicketData> tickets)
+        {
+            window.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                TicketsPage page = new TicketsPage(tickets);
+                window.NavigationService.Navigate(page);
+            }));
 
         }
 

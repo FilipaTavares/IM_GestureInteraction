@@ -196,16 +196,6 @@ namespace GestureModality
             // TODO
         }
 
-        private void gestureDetection(string gestureName)
-        {
-            string json = "{ \"recognized\": [" + "\"" + gestureName + "\"" + "] }";
-
-            Console.WriteLine(json);
-
-            var exNot = lce.ExtensionNotification(0 + "", 10 + "", 0, json);
-            mmic.Send(exNot);
-        }
-
         public void gestureSelection(string selection)
         {
             StringBuilder json = new StringBuilder("{ \"type\": \"NORMAL\",\"confidence\": \"GOOD\",\"recognized\": [" + "\"" + selection + "\",");

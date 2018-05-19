@@ -270,7 +270,7 @@ namespace GestureModality
 
         private void selectSenhas(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Senhas");
+            gestureDetector.gestureSelection("SAC");
         }
 
         private void selectNoticias(object sender, RoutedEventArgs e)

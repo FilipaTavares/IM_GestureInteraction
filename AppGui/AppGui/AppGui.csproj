@@ -41,6 +41,9 @@
     <Reference Include="MahApps.Metro, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.4\lib\net46\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro.IconPacks, Version=2.2.0.12, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.2.2.0\lib\net46\MahApps.Metro.IconPacks.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Speech, Version=11.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Microsoft SDKs\Speech\v11.0\Assembly\Microsoft.Speech.dll</HintPath>
@@ -82,12 +85,14 @@
     <Compile Include="ClientWeather.cs" />
     <Compile Include="Data\NewsData.cs" />
     <Compile Include="Data\WeatherData.cs" />
-    <Compile Include="GestureManager.cs" />
     <Compile Include="Pages\ParksPage.xaml.cs">
       <DependentUpon>ParksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PresentationPage.xaml.cs">
       <DependentUpon>PresentationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TicketsPage.xaml.cs">
+      <DependentUpon>TicketsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpeachClient.cs" />
     <Compile Include="ClientSAC.cs" />
@@ -119,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PresentationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TicketsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,6 +177,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\logo_ua.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\C.png" />
+    <Resource Include="Images\D.png" />
+    <Resource Include="Images\F.png" />
+    <Resource Include="Images\G.png" />
+    <Resource Include="Images\H.png" />
+    <Resource Include="Images\X.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -17,20 +17,20 @@ using System.Windows.Shapes;
 namespace AppGui.Pages
 {
     /// <summary>
-    /// Interaction logic for ParksPage.xaml
+    /// Interaction logic for TicketsPage.xaml
     /// </summary>
-    public partial class ParksPage : Page
+    public partial class TicketsPage : Page
     {
-
-
-        public ParksPage(List<ParkData> parks) {
+        public TicketsPage(List<TicketData> tickets)
+        {
             InitializeComponent();
-            loadData(parks);
+            loadData(tickets);
         }
 
-        private void loadData(List<ParkData> parks)
+        private void loadData(List<TicketData> tickets)
         {
-            parques.ItemsSource = parks;
+            senhas.ItemsSource = tickets;
         }
     }
 }
+

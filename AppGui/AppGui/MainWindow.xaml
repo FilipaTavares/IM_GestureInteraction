@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppGui"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="MainWindow" Height="400" Width="600" Source="Pages\PresentationPage.xaml">
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        ShowsNavigationUI="False"
+        Title="APP GUI"  Height="500" Width="800" Source="Pages\PresentationPage.xaml">
     
 </NavigationWindow>
