@@ -35,6 +35,8 @@ namespace GestureModality
 
         private MainWindow mainWindow;
 
+        private AppServer serverPipe;
+
         /// <summary>
         /// Initializes a new instance of the GestureDetector class along with the gesture frame source and reader
         /// </summary>
@@ -51,6 +53,8 @@ namespace GestureModality
             this.gFrameHandler = new GestureFrameHandler();
             this.gFrameHandler.load("gestures.json");
 
+            serverPipe = new AppServer();
+            serverPipe.run();
 
             //init LifeCycleEvents..
             lce = new LifeCycleEvents("GESTURES", "FUSION", "gesture-1", "haptics", "command"); // LifeCycleEvents(string source, string target, string id, string medium, string mode)
@@ -220,9 +224,13 @@ namespace GestureModality
                     break;
             }
 
-            Console.WriteLine(json.ToString());
-            var exNot = lce.ExtensionNotification(0 + "", 10 + "", 0, json.ToString());
-            mmic.Send(exNot);
+            
+            if (!serverPipe.IsSpeakRunning)
+            {
+                Console.WriteLine(json.ToString());
+                var exNot = lce.ExtensionNotification(0 + "", 10 + "", 0, json.ToString());
+                mmic.Send(exNot);
+            }
         }
     }
 }

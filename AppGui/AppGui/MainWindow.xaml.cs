@@ -25,9 +25,13 @@ namespace AppGui
 
         private ModalitiesManager dManager;
 
+        private bool speakFinish;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            speakFinish = true;
 
             AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
             mmiC = new MmiCommunication("localhost", 8000, "User1", "GUI");
@@ -45,9 +49,11 @@ namespace AppGui
         private void MmiC_Message(object sender, MmiEventArgs e)
         {
             Console.WriteLine(e.Message);
+
+            
             var doc = XDocument.Parse(e.Message);
             var com = doc.Descendants("command").FirstOrDefault().Value;
-          
+            
             dManager.handleIMcommand(com);
 
         }

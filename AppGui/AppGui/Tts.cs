@@ -12,7 +12,7 @@ namespace AppGui
     {
         SpeechSynthesizer tts = null;
         static SoundPlayer player = new SoundPlayer();
-        //private SpeachClient speachClient;
+        private GesturesClient guestureClient;
         private Random random;
         private string lastSentence = "Ainda não pediste nada";
 
@@ -93,16 +93,16 @@ namespace AppGui
             //set function to play audio after synthesis is complete
             tts.SpeakCompleted += new EventHandler<SpeakCompletedEventArgs>(tts_SpeakCompleted);
 
-            //speachClient = new SpeachClient(greathingsCallback);
+            guestureClient = new GesturesClient(greathingsCallback);
 
-            //speachClient.connect();
+            guestureClient.connect();
 
         }
 
         public void close()
         {
             //close some stuff
-            //speachClient.close();
+            guestureClient.close();
         }
 
         /*
@@ -116,7 +116,6 @@ namespace AppGui
             {
                 Console.WriteLine("Waiting...");
             }
-
             //create audio stream with speech
             player.Stream = new System.IO.MemoryStream();
             tts.SetOutputToWaveStream(player.Stream);
@@ -124,7 +123,7 @@ namespace AppGui
             tts.SpeakAsync(text);
 
             //attention blocking method, another thread?
-            //speachClient.sendTtsStart();
+            guestureClient.sendTtsStart();
         }
 
         public void SpeakRepeat()
@@ -160,11 +159,7 @@ namespace AppGui
 
         }
 
-        
-
-        public void addNewsToGrammar(List<string> news) {
-            //speachClient.sendDynamicNews(news);
-        }
+       
 
         /*
          * tts_SpeakCompleted
@@ -181,7 +176,7 @@ namespace AppGui
                     player.Stream.Position = 0;
                     player.PlaySync();
                     player.Stream = null;  //  NEW 2015
-                    //speachClient.sendTtsStop();
+                    guestureClient.sendTtsStop();
                 });
 
             }

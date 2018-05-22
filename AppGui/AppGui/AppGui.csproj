@@ -94,7 +94,7 @@
     <Compile Include="Pages\TicketsPage.xaml.cs">
       <DependentUpon>TicketsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SpeachClient.cs" />
+    <Compile Include="GesturesClient.cs" />
     <Compile Include="ClientSAC.cs" />
     <Compile Include="Data\CanteenData.cs" />
     <Compile Include="ClientCanteen.cs" />

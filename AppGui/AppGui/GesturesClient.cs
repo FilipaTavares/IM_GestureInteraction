@@ -8,13 +8,13 @@ using System.IO.Pipes;
 using System.IO;
 namespace AppGui
 {
-    class SpeachClient
+    class GesturesClient
     {
         private NamedPipeClientStream client;
         private StreamWriter writer;
         private Action ttsGreatingsCallback;
 
-        public SpeachClient(Action ttsGreatingsCallback)
+        public GesturesClient(Action ttsGreatingsCallback)
         {
          
             client = new NamedPipeClientStream("APPCALLBACK");
@@ -78,11 +78,6 @@ namespace AppGui
         public void sendTtsStart()
         {
             send("<START>", sendTtsStart);
-        }
-
-        public void sendDynamicNews(List<string> news) {
-            Console.WriteLine("\nADD DYNAMIC\n");
-            send("<DYNAMICADD>"+String.Join("|",news));
         }
 
         public void close() {

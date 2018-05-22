@@ -137,6 +137,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AppServer.cs" />
     <Compile Include="CustomGesture.cs" />
     <Compile Include="GestureDetector.cs" />
     <Compile Include="GestureFrameHandler.cs" />
