@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:AppGui.Pages"
       mc:Ignorable="d" 
       xmlns:gif="http://wpfanimatedgif.codeplex.com"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="500" d:DesignWidth="850"
       Title="PresentationPage">
 
     <Grid>
@@ -29,21 +29,23 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image Grid.Row="0" Grid.Column="0" gif:ImageBehavior.AnimatedSource="..\Gif\canteen.gif" />
             <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Center"  FontSize="18" Margin="10,0,0,0">Cantinas</TextBlock>
 
-            <Image Grid.Row="0" Grid.Column="1" gif:ImageBehavior.AnimatedSource="..\Gif\news.gif" />
-            <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center"  FontSize="18" Margin="10,0,0,0">Notícias</TextBlock>
+            <Image Grid.Row="0" Grid.Column="2" gif:ImageBehavior.AnimatedSource="..\Gif\news.gif" />
+            <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Center"  FontSize="18" Margin="10,0,0,0">Notícias</TextBlock>
 
-            <Image Grid.Row="0" Grid.Column="2" gif:ImageBehavior.AnimatedSource="..\Gif\parques.gif" />
-            <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Center"  FontSize="18" Margin="10,0,0,0">Parques de estacionamento</TextBlock>
+            <Image Grid.Row="0" Grid.Column="4" gif:ImageBehavior.AnimatedSource="..\Gif\parques.gif" />
+            <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Stretch" HorizontalAlignment="Center"  FontSize="18" Margin="10,0,0,0">Parques</TextBlock>
 
-            <Image Grid.Row="2" Grid.Column="0" gif:ImageBehavior.AnimatedSource="..\Gif\weather.gif" />
-            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Center"  FontSize="18" Margin="10,0,0,0">Tempo</TextBlock>
-
-            <Image Grid.Row="2" Grid.Column="1" gif:ImageBehavior.AnimatedSource="..\Gif\tickets.gif" />
+            <Image Grid.Row="2" Grid.Column="1" gif:ImageBehavior.AnimatedSource="..\Gif\weather.gif" />
             <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center"  FontSize="18" Margin="10,0,0,0">Tempo</TextBlock>
+
+            <Image Grid.Row="2" Grid.Column="3" gif:ImageBehavior.AnimatedSource="..\Gif\tickets.gif" />
+            <TextBlock Grid.Row="3" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"  FontSize="18" Margin="10,0,0,0">Senhas académicas</TextBlock>
             
         </Grid>
     </Grid>
