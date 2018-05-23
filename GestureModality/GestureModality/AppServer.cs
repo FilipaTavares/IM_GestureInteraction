@@ -5,6 +5,7 @@ using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace GestureModality
 {
@@ -59,6 +60,14 @@ namespace GestureModality
                             case "<START>":
                                 isSpeakRunning = true;
 
+                                break;
+                            case "<FIRST_START>":
+                                isSpeakRunning = true;
+                                window.Dispatcher.BeginInvoke((Action)(() =>
+                                {
+                                    window.resetDefaultColor();
+                                    window.changeColorTiles("HELP",Brushes.Green);
+                                }));
                                 break;
                             case "<STOP>":
                                 isSpeakRunning = false;

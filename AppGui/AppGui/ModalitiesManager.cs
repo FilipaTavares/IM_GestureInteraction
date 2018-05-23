@@ -32,7 +32,7 @@ namespace AppGui
 
         private void greathingsCallback()
         {
-            t.Speak(answers.getGreathings());
+            t.FirstSpeak(answers.getGreathings());
         }
 
         public ModalitiesManager(MainWindow window)

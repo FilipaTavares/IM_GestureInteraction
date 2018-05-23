@@ -80,6 +80,11 @@ namespace AppGui
             send("<START>", sendTtsStart);
         }
 
+        public void sendTtsFirstStart()
+        {
+            send("<FIRST_START>", sendTtsFirstStart);
+        }
+
         public void close() {
             send("<CLOSE>");
             client.Close();

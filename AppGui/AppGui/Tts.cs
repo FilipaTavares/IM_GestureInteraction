@@ -126,6 +126,22 @@ namespace AppGui
             guestureClient.sendTtsStart();
         }
 
+        public void FirstSpeak(string text, bool saveLast = true)
+        {
+            while (player.Stream != null)
+            {
+                Console.WriteLine("Waiting...");
+            }
+            //create audio stream with speech
+            player.Stream = new System.IO.MemoryStream();
+            tts.SetOutputToWaveStream(player.Stream);
+            if (saveLast) lastSentence = text;
+            tts.SpeakAsync(text);
+
+            //attention blocking method, another thread?
+            guestureClient.sendTtsFirstStart();
+        }
+
         public void SpeakRepeat()
         {
             Speak(startReapeat[random.Next(0, startReapeat.Length)]+lastSentence,false);
