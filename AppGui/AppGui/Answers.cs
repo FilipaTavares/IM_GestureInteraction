@@ -313,11 +313,11 @@ namespace AppGui
             sb.Replace("<DIA>", canteen.DayDescription);
             sb.Replace("<REFEIÇÃO>", canteen.Meal);
             sb.Replace("<NOME_CANTINA>", canteen.Canteen);
-            sb.Replace("<CARNE>", !canteen.Meat.Equals("0") ? canteen.Meat : "");
-            sb.Replace("<PEIXE>", !canteen.Fish.Equals("0") ? canteen.Fish : "");
-            sb.Replace("<OPÇÃO>", !canteen.Option.Equals("0") ? canteen.Option : "");
-            sb.Replace("<DIETA>", !canteen.Diet.Equals("0") ? canteen.Diet : "");
-            sb.Replace("<VEGETARIANO>", !canteen.Vegetarian.Equals("0") ? canteen.Vegetarian : "");
+            sb.Replace("<CARNE>", canteen.Meat);
+            sb.Replace("<PEIXE>", canteen.Fish);
+            sb.Replace("<OPÇÃO>", canteen.Option);
+            sb.Replace("<DIETA>", canteen.Diet);
+            sb.Replace("<VEGETARIANO>", canteen.Vegetarian);
 
             return sb.ToString();
 

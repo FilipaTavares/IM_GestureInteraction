@@ -165,6 +165,15 @@ namespace AppGui
             t.close();
         }
 
+        public void displayCanteens(List<CanteenData> meals)
+        {
+            window.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                CanteensPage page = new CanteensPage(meals);
+                window.NavigationService.Navigate(page);
+            }));
+        }
+
         public void displayParks(List<ParkData> parks)
         {
             window.Dispatcher.BeginInvoke((Action)(() =>
@@ -479,6 +488,5 @@ namespace AppGui
 
             t.Speak(phrase);
         }
-
     }
 }

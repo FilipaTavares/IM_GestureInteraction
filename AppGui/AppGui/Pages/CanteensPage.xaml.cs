@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppGui.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,16 @@ namespace AppGui
     /// </summary>
     public partial class CanteensPage : Page
     {
-        public CanteensPage()
+        public CanteensPage(List<CanteenData> meals)
         {
             InitializeComponent();
+            loadData(meals);
+        }
+
+        private void loadData(List<CanteenData> meals)
+        {
+            List<CanteenData> filteredList = meals.Where(x => x.Disabled.Equals("0")).ToList();
+            cantinas.ItemsSource = filteredList;
         }
     }
 }

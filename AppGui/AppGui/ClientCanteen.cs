@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using System.IO;
 using System.Globalization;
 using System.Net;
+using AppGui.Data;
 
 namespace AppGui
 {
@@ -78,7 +79,8 @@ namespace AppGui
         }
 
 
-        private Tuple<DateTime, string> getValidDate_Description(string[] new_args) {
+        private Tuple<DateTime, string> getValidDate_Description(string[] new_args)
+        {
 
             if (new_args[0].ToString().Equals("SUBTYPE1") || new_args[1].ToString().Equals("today")) return new Tuple<DateTime, string>(DateTime.Today, "hoje");
 
@@ -131,7 +133,13 @@ namespace AppGui
             XDocument document = XDocument.Load(new StringReader(response));
 
             Tuple<DateTime, string> date_descripton;
-            string meal = args[1].ToString();
+
+            string meal = "";
+
+            if (args.Length >= 2)
+            {
+                meal = args[1].ToString();
+            }
 
             List<CanteenData> meals = null;
 
@@ -169,11 +177,11 @@ namespace AppGui
                              Weekday = r.Attribute("weekday").Value,
                              WeekdayNr = int.Parse(r.Attribute("weekdayNr").Value),
                              Disabled = r.Attribute("disabled").Value,
-                             Meat = (d.IsEmpty || d.Descendants("item").ElementAt(1).IsEmpty) ? "0" : d.Descendants("item").ElementAt(1).Value,
-                             Fish = (d.IsEmpty || d.Descendants("item").ElementAt(2).IsEmpty) ? "0" : d.Descendants("item").ElementAt(2).Value,
-                             Diet = (d.IsEmpty || d.Descendants("item").ElementAt(3).IsEmpty) ? "0" : d.Descendants("item").ElementAt(3).Value,
-                             Vegetarian = (d.IsEmpty || d.Descendants("item").ElementAt(4).IsEmpty) ? "0" : d.Descendants("item").ElementAt(4).Value,
-                             Option = (d.IsEmpty || d.Descendants("item").ElementAt(5).IsEmpty) ? "0" : d.Descendants("item").ElementAt(5).Value
+                             Meat = (d.IsEmpty || d.Descendants("item").ElementAt(1).IsEmpty) ? "" : d.Descendants("item").ElementAt(1).Value,
+                             Fish = (d.IsEmpty || d.Descendants("item").ElementAt(2).IsEmpty) ? "" : d.Descendants("item").ElementAt(2).Value,
+                             Diet = (d.IsEmpty || d.Descendants("item").ElementAt(3).IsEmpty) ? "" : d.Descendants("item").ElementAt(3).Value,
+                             Vegetarian = (d.IsEmpty || d.Descendants("item").ElementAt(4).IsEmpty) ? "" : d.Descendants("item").ElementAt(4).Value,
+                             Option = (d.IsEmpty || d.Descendants("item").ElementAt(5).IsEmpty) ? "" : d.Descendants("item").ElementAt(5).Value
                          }).ToList<CanteenData>();
             }
 
@@ -212,11 +220,11 @@ namespace AppGui
                              Weekday = r.Attribute("weekday").Value,
                              WeekdayNr = int.Parse(r.Attribute("weekdayNr").Value),
                              Disabled = r.Attribute("disabled").Value,
-                             Meat = (d.IsEmpty || d.Descendants("item").ElementAt(1).IsEmpty) ? "0" : d.Descendants("item").ElementAt(1).Value,
-                             Fish = (d.IsEmpty || d.Descendants("item").ElementAt(2).IsEmpty) ? "0" : d.Descendants("item").ElementAt(2).Value,
-                             Diet = (d.IsEmpty || d.Descendants("item").ElementAt(3).IsEmpty) ? "0" : d.Descendants("item").ElementAt(3).Value,
-                             Vegetarian = (d.IsEmpty || d.Descendants("item").ElementAt(4).IsEmpty) ? "0" : d.Descendants("item").ElementAt(4).Value,
-                             Option = (d.IsEmpty || d.Descendants("item").ElementAt(5).IsEmpty) ? "0" : d.Descendants("item").ElementAt(5).Value
+                             Meat = (d.IsEmpty || d.Descendants("item").ElementAt(1).IsEmpty) ? "" : d.Descendants("item").ElementAt(1).Value,
+                             Fish = (d.IsEmpty || d.Descendants("item").ElementAt(2).IsEmpty) ? "" : d.Descendants("item").ElementAt(2).Value,
+                             Diet = (d.IsEmpty || d.Descendants("item").ElementAt(3).IsEmpty) ? "" : d.Descendants("item").ElementAt(3).Value,
+                             Vegetarian = (d.IsEmpty || d.Descendants("item").ElementAt(4).IsEmpty) ? "" : d.Descendants("item").ElementAt(4).Value,
+                             Option = (d.IsEmpty || d.Descendants("item").ElementAt(5).IsEmpty) ? "" : d.Descendants("item").ElementAt(5).Value
                          }).ToList<CanteenData>(); // é uma lista para ficar + generico ver dialogue manager
 
                 if (meals.Count > 0) meals[0].DayDescription = dayDescription;
@@ -264,14 +272,48 @@ namespace AppGui
                              Weekday = r.Attribute("weekday").Value,
                              WeekdayNr = int.Parse(r.Attribute("weekdayNr").Value),
                              Disabled = r.Attribute("disabled").Value,
-                             Meat = (d.IsEmpty || d.Descendants("item").ElementAt(1).IsEmpty) ? "0" : d.Descendants("item").ElementAt(1).Value,
-                             Fish = (d.IsEmpty || d.Descendants("item").ElementAt(2).IsEmpty) ? "0" : d.Descendants("item").ElementAt(2).Value,
-                             Diet = (d.IsEmpty || d.Descendants("item").ElementAt(3).IsEmpty) ? "0" : d.Descendants("item").ElementAt(3).Value,
-                             Vegetarian = (d.IsEmpty || d.Descendants("item").ElementAt(4).IsEmpty) ? "0" : d.Descendants("item").ElementAt(4).Value,
-                             Option = (d.IsEmpty || d.Descendants("item").ElementAt(5).IsEmpty) ? "0" : d.Descendants("item").ElementAt(5).Value,
+                             Meat = (d.IsEmpty || d.Descendants("item").ElementAt(1).IsEmpty) ? "" : d.Descendants("item").ElementAt(1).Value,
+                             Fish = (d.IsEmpty || d.Descendants("item").ElementAt(2).IsEmpty) ? "" : d.Descendants("item").ElementAt(2).Value,
+                             Diet = (d.IsEmpty || d.Descendants("item").ElementAt(3).IsEmpty) ? "" : d.Descendants("item").ElementAt(3).Value,
+                             Vegetarian = (d.IsEmpty || d.Descendants("item").ElementAt(4).IsEmpty) ? "" : d.Descendants("item").ElementAt(4).Value,
+                             Option = (d.IsEmpty || d.Descendants("item").ElementAt(5).IsEmpty) ? "" : d.Descendants("item").ElementAt(5).Value,
                              DayDescription = dayDescription
                          }).ToList<CanteenData>();
             }
+
+            else if (args[0].Equals("TYPE5"))
+            {
+                DateTime date = DateTime.Today;
+                string dayDescription = "hoje";
+
+                string format = "ddd, dd MMM yyyy";   // Use this format.
+                Console.WriteLine(date.ToString(format, culture)); // Write to console.
+
+                meals = (from r in document.Descendants("menu").Where
+                                    (r => r.Attribute("canteen").Value.Equals("Refeitório do Crasto") || r.Attribute("canteen").Value.Equals("Refeitório de Santiago")).Where
+                                    (r => int.Parse(r.Attribute("weekdayNr").Value) == (int)date.DayOfWeek).Where
+                                    (r => r.Attribute("date").Value.Contains(date.ToString(format, culture)))
+                         from d in r.Elements("items")
+
+                         select new CanteenData
+                         {
+                             Canteen = r.Attribute("canteen").Value,
+                             Meal = r.Attribute("meal").Value,
+                             Date = r.Attribute("date").Value,
+                             Weekday = r.Attribute("weekday").Value,
+                             WeekdayNr = int.Parse(r.Attribute("weekdayNr").Value),
+                             Disabled = r.Attribute("disabled").Value,
+                             Meat = (d.IsEmpty || d.Descendants("item").ElementAt(1).IsEmpty) ? "" : d.Descendants("item").ElementAt(1).Value,
+                             Fish = (d.IsEmpty || d.Descendants("item").ElementAt(2).IsEmpty) ? "" : d.Descendants("item").ElementAt(2).Value,
+                             Diet = (d.IsEmpty || d.Descendants("item").ElementAt(3).IsEmpty) ? "" : d.Descendants("item").ElementAt(3).Value,
+                             Vegetarian = (d.IsEmpty || d.Descendants("item").ElementAt(4).IsEmpty) ? "" : d.Descendants("item").ElementAt(4).Value,
+                             Option = (d.IsEmpty || d.Descendants("item").ElementAt(5).IsEmpty) ? "" : d.Descendants("item").ElementAt(5).Value,
+                             DayDescription = dayDescription
+                         }).ToList<CanteenData>();
+
+                dManager.displayCanteens(meals);
+            }
+
             dManager.manageDialogueCanteen(meals);
         }
 

@@ -209,7 +209,7 @@ namespace GestureModality
                 switch (selection)
                 {
                     case "CANTEENS":
-                        json.Append(",\"TYPE3\", \"Jantar\" ] }");
+                        json.Append(",\"TYPE5\" ] }");
                         break;
                     case "SAS":
                         string subtype = "SUBTYPE1";
