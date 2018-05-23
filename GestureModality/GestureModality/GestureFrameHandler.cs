@@ -4,6 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System;
 using Newtonsoft.Json.Linq;
+using System.Windows.Media;
 
 namespace GestureModality
 {
@@ -15,12 +16,14 @@ namespace GestureModality
         private HashSet<KeyValuePair<int, CustomGesture>> state;
         private bool firstFrame;
         private int frames;
+        private MainWindow window;
+        private AppServer server;
 
-
-        public GestureFrameHandler() {
+        public GestureFrameHandler(MainWindow window) {
             state = new HashSet<KeyValuePair<int, CustomGesture>>();
             firstFrame = true;
             frames = 0;
+            this.window = window;
         }
 
         public void load(string jsonName) {
@@ -58,7 +61,9 @@ namespace GestureModality
                 }
             }*/
 
-            if (!firstFrame && ++frames > 90) {
+            updateUI();
+
+            if (!firstFrame && ++frames > 70) {
                 Console.WriteLine("State reseted affter " + frames);
                 resetState();
                 
@@ -82,7 +87,7 @@ namespace GestureModality
             }
 
             //se adicionei algum gesto para ser detetado
-            if (firstFrame && state.Count!= 0 && ++frames > 15)
+            if (firstFrame && state.Count!= 0 && ++frames > 20)
             {//initial 10 sec window for more frames
 
                 Console.WriteLine("Initial Window finish with state "+ state.Count);
@@ -92,6 +97,15 @@ namespace GestureModality
             } 
 
             return null;
+        }
+
+        private void updateUI()
+        {
+            window.resetDefaultColor();
+            foreach (var s in state)
+            {
+                window.changeColorTiles(s.Value.GestureName.Split('_')[0], Brushes.Orange);
+            }
         }
 
         private bool matchComplete(CustomGesture gestureToMatch, int index) {

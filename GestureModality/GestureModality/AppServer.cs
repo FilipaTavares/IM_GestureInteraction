@@ -14,15 +14,25 @@ namespace GestureModality
         private StreamReader reader;
         private bool isSpeakRunning;
 
+        private MainWindow window;
+
         public bool IsSpeakRunning
         {
             get
             {
                 return isSpeakRunning;
             }
+
+            set
+            {
+                isSpeakRunning = value;
+            }
         }
 
-        public AppServer() { isSpeakRunning = false; }
+        public AppServer(MainWindow window) {
+            isSpeakRunning = false;
+            this.window = window;
+        }
 
        
 
@@ -52,7 +62,10 @@ namespace GestureModality
                                 break;
                             case "<STOP>":
                                 isSpeakRunning = false;
-
+                                window.Dispatcher.BeginInvoke((Action)(() =>
+                                {
+                                    window.resetDefaultColor();
+                                }));
                                 break;
 
                             case null:

@@ -50,10 +50,10 @@ namespace GestureModality
             }
 
             this.mainWindow = window;
-            this.gFrameHandler = new GestureFrameHandler();
+            this.gFrameHandler = new GestureFrameHandler(window);
             this.gFrameHandler.load("gestures.json");
 
-            serverPipe = new AppServer();
+            serverPipe = new AppServer(window);
             serverPipe.run();
 
             //init LifeCycleEvents..
@@ -177,7 +177,7 @@ namespace GestureModality
                     // get the discrete gesture results which arrived with the latest frame
                     IReadOnlyDictionary<Gesture, ContinuousGestureResult> continuousResults = frame.ContinuousGestureResults;
 
-                    if (discreteResults != null) { 
+                    if (discreteResults != null && !serverPipe.IsSpeakRunning) { 
                         string result = gFrameHandler.handleFrame(discreteResults);
                         if (result != null) {
                             gestureSelection(result.Split('_')[0]);
@@ -202,31 +202,40 @@ namespace GestureModality
 
         public void gestureSelection(string selection)
         {
-            StringBuilder json = new StringBuilder("{ \"type\": \"NORMAL\",\"confidence\": \"GOOD\",\"recognized\": [" + "\"" + selection + "\",");
-            switch (selection)
-            {
-                case "CANTEENS":
-                    json.Append("\"TYPE3\", \"Jantar\" ] }");
-                    break;
-                case "SAS":
-                    string subtype = "SUBTYPE1";
-                    string type = "TYPE1";
-                    json.Append("\"" + type + "\"," + "\"" + subtype + "\"" + "] }");
-                    break;
-                case "SAC":
-                    json.Append("\"TYPE1\" ] }");
-                    break;
-                case "NEWS":
-                    json.Append("\"TYPE1\" ] }");
-                    break;
-                case "WEATHER":
-                    json.Append("\"TYPE1\",\"tomorrow\",\"tomorrow\",\"\" ] }");
-                    break;
-            }
-
-            
             if (!serverPipe.IsSpeakRunning)
             {
+
+                StringBuilder json = new StringBuilder("{ \"type\": \"NORMAL\",\"confidence\": \"GOOD\",\"recognized\": [" + "\"" + selection + "\"");
+                switch (selection)
+                {
+                    case "CANTEENS":
+                        json.Append(",\"TYPE3\", \"Jantar\" ] }");
+                        break;
+                    case "SAS":
+                        string subtype = "SUBTYPE1";
+                        string type = "TYPE1";
+                        json.Append(",\"" + type + "\"," + "\"" + subtype + "\"" + "] }");
+                        break;
+                    case "SAC":
+                        json.Append(",\"TYPE1\" ] }");
+                        break;
+                    case "NEWS":
+                        json.Append(",\"TYPE1\" ] }");
+                        break;
+                    case "WEATHER":
+                        json.Append(",\"TYPE1\",\"tomorrow\",\"tomorrow\",\"\" ] }");
+                        break;
+                    case "HELP":
+                        json.Append(" ] }");
+                        break;
+                }
+
+                //gui color change
+                mainWindow.resetDefaultColor();
+                serverPipe.IsSpeakRunning = true; //manual change so dont allow kinect change to orange between frames
+                mainWindow.changeColorTiles(selection,Brushes.Green);
+            
+            
                 Console.WriteLine(json.ToString());
                 var exNot = lce.ExtensionNotification(0 + "", 10 + "", 0, json.ToString());
                 mmic.Send(exNot);

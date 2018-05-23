@@ -47,6 +47,8 @@ namespace GestureModality
 
         private Body currentTrackedBody = null;
 
+        private Brush blueColor;
+
         private ulong currentTrackingId = 0;
 
         private static readonly string noKinect = "Kinect não conectada";
@@ -96,6 +98,8 @@ namespace GestureModality
             this.kinectBodyViewbox.DataContext = this.kinectBodyView;
 
             this.gestureDetector = new GestureDetector(this.kinectSensor, this);
+
+            blueColor = (Brush)new BrushConverter().ConvertFrom("#CC119EDA");
         }
 
         /// <summary>
@@ -116,7 +120,7 @@ namespace GestureModality
             if (this.gestureDetector != null)
             {
                 this.gestureDetector.Dispose();
-
+                
             }
 
             if (this.kinectSensor != null)
@@ -260,7 +264,7 @@ namespace GestureModality
 
         private void selectCantinas(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Cantinas");
+            gestureDetector.gestureSelection("CANTEENS");
         }
 
         private void selectParques(object sender, RoutedEventArgs e)
@@ -275,7 +279,7 @@ namespace GestureModality
 
         private void selectNoticias(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Noticias");
+            gestureDetector.gestureSelection("NEWS");
         }
 
         private void selectTempo(object sender, RoutedEventArgs e)
@@ -285,7 +289,47 @@ namespace GestureModality
 
         private void selectAjuda(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Ajuda");
+            gestureDetector.gestureSelection("HELP");
+        }
+
+        public void changeColorTiles(string name, Brush color) {
+            
+            switch (name) {
+                case ("HELP"):
+                    applyColor(ajuda, color);
+                    break;
+                case ("CANTEENS"):
+                    applyColor(cantinas, color);
+                    break;
+                case ("SAC"):
+                    applyColor(senhas, color);
+                    break;
+                case ("SAS"):
+                    applyColor(parques, color);
+                    break;
+                case ("NEWS"):
+                    applyColor(noticias, color);
+                    break;
+                case ("WEATHER"):
+                    applyColor(tempo,color);
+                    break;
+            }
+        }
+
+        public void resetDefaultColor() {
+            senhas.Background = blueColor;
+            parques.Background = blueColor;
+            tempo.Background = blueColor;
+            cantinas.Background = blueColor;
+            noticias.Background = blueColor;
+            ajuda.Background = blueColor;
+        }
+
+        private void applyColor(Tile tile, Brush color) {
+            //only update color if is diferent
+            if (!tile.Background.Equals(color)) {
+                tile.Background = color;
+            }
         }
     }
 }

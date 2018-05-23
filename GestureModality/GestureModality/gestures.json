@@ -1,7 +1,7 @@
 ﻿{
   "NEWS": [
     { "NewsClose": 0.4 },
-    { "NewsOpen": 0.7 }
+    { "NewsOpen": 0.6 }
   ],
   "SAC": [
     { "TicketsTop": 0.65 },
@@ -13,14 +13,14 @@
   ],
   "SAS_0": [
     { "Stering_Left": 0.75 },
-    { "Stering_Right": 0.9 }
+    { "Stering_Right": 0.85 }
   ],
   "SAS_1": [
-    { "Stering_Right": 0.9 },
+    { "Stering_Right": 0.85 },
     { "Stering_Left": 0.75 }
   ],
   "WEATHER": [
-    { "Weather_Left": 0.75 },
-    { "Weather_Right": 0.75 }
+    { "Weather_Left": 0.70 },
+    { "Weather_Right": 0.70 }
   ]
 }
