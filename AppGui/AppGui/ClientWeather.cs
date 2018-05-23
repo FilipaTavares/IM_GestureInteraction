@@ -144,8 +144,8 @@ namespace AppGui
                     return;
                 }
             }
-            Console.WriteLine("dataaaaaaaaaaaa " + weather);
             dManager.manageDialogueWeather(weather, args[0].ToString());
+            dManager.displayWeather(weather);
 
         }
 

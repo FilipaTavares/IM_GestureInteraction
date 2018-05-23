@@ -141,6 +141,24 @@ namespace AppGui
             }
         }
 
+        public void displayServiceNotAvailable(string service)
+        {
+            window.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                ServiceNotAvailable page = new ServiceNotAvailable(service);
+                window.NavigationService.Navigate(page);
+            }));
+        }
+
+        public void displayWeather(WeatherData weather)
+        {
+            window.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                WeatherPage page = new WeatherPage(weather);
+                window.NavigationService.Navigate(page);
+            }));
+        }
+
         public void close()
         {
             //do some close stuff!!!

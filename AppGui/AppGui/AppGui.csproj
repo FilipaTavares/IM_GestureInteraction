@@ -91,6 +91,9 @@
     <Compile Include="Pages\PresentationPage.xaml.cs">
       <DependentUpon>PresentationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ServiceNotAvailable.xaml.cs">
+      <DependentUpon>ServiceNotAvailable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TicketsPage.xaml.cs">
       <DependentUpon>TicketsPage.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,9 @@
     <Compile Include="Data\ParkData.cs" />
     <Compile Include="ModalitiesManager.cs" />
     <Compile Include="Data\TicketData.cs" />
+    <Compile Include="Pages\WeatherPage.xaml.cs">
+      <DependentUpon>WeatherPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tts.cs" />
     <Page Include="Pages\CanteensPage.xaml">
       <SubType>Designer</SubType>
@@ -127,7 +133,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ServiceNotAvailable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\TicketsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WeatherPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,6 +202,9 @@
     <Resource Include="Images\G.png" />
     <Resource Include="Images\H.png" />
     <Resource Include="Images\X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\simpson.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

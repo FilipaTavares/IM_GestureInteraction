@@ -280,7 +280,7 @@ namespace GestureModality
 
         private void selectTempo(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Tempo");
+            gestureDetector.gestureSelection("WEATHER");
         }
 
         private void selectAjuda(object sender, RoutedEventArgs e)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppGui.Data
 {
-    class WeatherData
+    public class WeatherData
     {
 
         private int minTemp;
@@ -14,7 +14,6 @@ namespace AppGui.Data
         private int windSpeed;
         private int humidity;
         private string description;
-
         private string dayDescription;   // hoje, amanhã, na segunda, dia 23
         private DateTime date;
 
