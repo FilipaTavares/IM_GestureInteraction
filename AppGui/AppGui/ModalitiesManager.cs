@@ -132,6 +132,7 @@ namespace AppGui
                 case "HELP":
                     Console.WriteLine("HELP");
                     manageDialogueHelp();
+                    
                     break;
 
                 case "REPEAT":
@@ -180,6 +181,16 @@ namespace AppGui
             window.Dispatcher.BeginInvoke((Action)(() =>
             {
                 TicketsPage page = new TicketsPage(tickets);
+                window.NavigationService.Navigate(page);
+            }));
+
+        }
+
+        public void displayHELP()
+        {
+            window.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                PresentationPage page = new PresentationPage();
                 window.NavigationService.Navigate(page);
             }));
 
@@ -449,6 +460,7 @@ namespace AppGui
 
         public void manageDialogueHelp()
         {
+            displayHELP();
             t.Speak(answers.getHelp());
         }
 
