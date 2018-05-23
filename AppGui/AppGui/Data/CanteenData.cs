@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppGui
+namespace AppGui.Data
 {
-    class CanteenData
+    public class CanteenData
     {
         private string canteen;
         private string meal;
