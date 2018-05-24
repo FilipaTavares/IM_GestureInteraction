@@ -217,7 +217,7 @@ namespace AppGui
          * Greathings
          */
         private string[] greathings = new string[]{
-            "Olá, sou um assistente virtual. Consigo ajudar-te com senhas académicas, refeições nas cantinas, parques de estacionamento do campos, as últimas notícias acerca da Universidade, e o estado do tempo\nEm caso de dúvidas basta pedir \"ajuda\"\nSe por acaso não conseguires perceber alguma informação, devido ao barulho de fundo, podes pedir para repetir",
+            "Olá, sou um assistente virtual. Consigo ajudar-te com sanhas académicas, refeições nas cantinas, parques de estacionamento do campos, as últimas notícias acerca da Universidade, e o estado do tempo\nEm caso de dúvidas basta selecionar \"ajuda\"\n",
             //"MUDAR"
         };
 

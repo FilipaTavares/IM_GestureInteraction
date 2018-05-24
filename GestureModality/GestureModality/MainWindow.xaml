@@ -39,12 +39,11 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="1" x:Name="kinectStatus" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{DynamicResource SubHeaderFontSize}"></TextBlock>
-            <Border Margin="5" Grid.Column="1" Grid.Row="0" BorderBrush="SteelBlue" BorderThickness="2" CornerRadius="0">
-                <Viewbox x:Name="kinectBodyViewbox" >
-                    <Image Source="{Binding ImageSource}"/>
-                </Viewbox>
+            
+            <Viewbox Grid.Row="1" Grid.Column="1" x:Name="kinectBodyViewbox" >
+                <Image Source="{Binding ImageSource}"/>
+            </Viewbox>
 
-            </Border>
 
         </Grid>
 

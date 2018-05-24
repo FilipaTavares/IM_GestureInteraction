@@ -139,7 +139,8 @@ namespace GestureModality
         private void Sensor_IsAvailableChanged(object sender, IsAvailableChangedEventArgs e)
         {
             // on failure, set the status text
-            this.kinectStatus.Text = this.kinectSensor.IsAvailable ? availableKinect
+            if (this.kinectSensor!=null)
+                this.kinectStatus.Text = this.kinectSensor.IsAvailable ? availableKinect
                                                             : noKinect;
         }
 
