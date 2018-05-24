@@ -405,7 +405,7 @@ namespace AppGui
             return sb.ToString();
         }
 
-        public string getNewsDescription(NewsData newsData) { return newsDescription[random.Next(0, newsDescription.Length)].Replace("<DESCRICAO>", Regex.Replace(newsData.Description, "<.*?>", String.Empty)); ; }
+        public string getNewsDescription(NewsData newsData) { return newsDescription[random.Next(0, newsDescription.Length)].Replace("<DESCRICAO>", newsData.Description); ; }
 
         public string getHelpNews(bool v){ return v?helpNewsTrue[random.Next(0, helpNewsTrue.Length)]: helpNewsFalse[random.Next(0, helpNewsFalse.Length)];}
 

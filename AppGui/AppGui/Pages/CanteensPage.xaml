@@ -28,7 +28,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type data:CanteenData}">
-                    <Controls:Tile Width="Auto" Height="Auto" HorizontalAlignment="Stretch" Panel.ZIndex="0" VerticalAlignment="Stretch"  FontSize="{DynamicResource WindowTitleFontSize}">
+                    <Controls:Tile Width="Auto" Height="Auto" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Panel.ZIndex="0" VerticalAlignment="Stretch"  FontSize="{DynamicResource WindowTitleFontSize}">
                         <UniformGrid Columns="1" Rows="4" Margin="21,5,5,5">
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
@@ -42,17 +42,17 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
-                                <iconPacks:PackIconFontAwesome Width="30" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Left" Kind="UtensilsSolid" />
+                                <iconPacks:PackIconMaterial Width="30" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Left" Kind="Cow" />
                                 <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Left" Text="{Binding Meat}" FontSize="18" Margin="10,0,0,0" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
-                                <iconPacks:PackIconFontAwesome Width="30" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Left" Kind="UtensilsSolid" />
+                                <iconPacks:PackIconMaterial Width="30" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Left" Kind="Fish" />
                                 <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Left" Text="{Binding Fish}" FontSize="18" Margin="10,0,0,0" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
-                                <iconPacks:PackIconFontAwesome Width="30" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Left" Kind="UtensilsSolid" />
+                                <iconPacks:PackIconMaterial Width="30" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Left" Kind="FoodApple" />
                                 <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Left" Text="{Binding Vegetarian}" FontSize="18" Margin="10,0,0,0" />
                             </StackPanel>
 

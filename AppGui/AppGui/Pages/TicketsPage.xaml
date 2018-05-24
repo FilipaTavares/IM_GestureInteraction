@@ -37,7 +37,7 @@
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                 <iconPacks:PackIconFontAwesome Width="30" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Kind="SortNumericDownSolid" Foreground="Black"/>
-                                <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Latest, StringFormat='\{0} - senha tual'}" FontSize="18" Margin="10,0,0,0" />
+                                <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Latest, StringFormat='\{0} - senha atual'}" FontSize="18" Margin="10,0,0,0" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">

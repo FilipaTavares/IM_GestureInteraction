@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppGui.Data
 {
-    class NewsData
+    public class NewsData
     {
         private string title;
         private string description;

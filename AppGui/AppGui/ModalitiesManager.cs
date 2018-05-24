@@ -142,6 +142,15 @@ namespace AppGui
             }
         }
 
+        public void displayNews(List<NewsData> newsList)
+        {
+            window.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                NewsPage page = new NewsPage(newsList);
+                window.NavigationService.Navigate(page);
+            }));
+        }
+
         public void displayServiceNotAvailable(string service)
         {
             window.Dispatcher.BeginInvoke((Action)(() =>

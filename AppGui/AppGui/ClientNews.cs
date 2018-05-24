@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AppGui
@@ -75,13 +76,14 @@ namespace AppGui
             foreach (dynamic item in json.rss.channel.item) {
                 NewsData news = new NewsData();
                 news.Title = item.title;
-                news.Description = item.description;
+                news.Description = Regex.Replace(item.description.ToString(), "<.*?>", String.Empty); 
                 news.Date = item.pubDate;
 
                 newsList.Add(news);
             }
 
             dManager.manageDialogueNews(newsList, args);
+            dManager.displayNews(newsList);
         }
     }
 }
